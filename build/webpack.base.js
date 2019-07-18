@@ -1,0 +1,149 @@
+const {
+  resolve
+} = require('./util');
+const webpack = require('webpack');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ProgressPlugin = require('progress-bar-webpack-plugin');
+const MiniCssExtractLoader = require('mini-css-extract-plugin');
+
+const {
+  definePluginConfig
+} = require('./config');
+
+const cssLoadersGenrators = (loaders) => [
+  process.env.NODE_ENV === 'production' ? MiniCssExtractLoader.loader : 'vue-style-loader',
+  'css-loader',
+  ...loaders,
+  'postcss-loader'
+];
+
+module.exports = {
+  entry: {
+    'app': resolve('src/index.js')
+  },
+  output: {
+    path: resolve('dist'),
+    publicPath: '/',
+    globalObject: 'this'
+  },
+  module: {
+    noParse: /^(vue|vue-router|vuex|vuex-router-sync)$/,
+    rules: [{
+        test: /.vue$/,
+        loader: 'vue-loader'
+      },
+      {
+        test: /.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /.css$/,
+        use: cssLoadersGenrators([])
+      },
+      {
+        test: /.scss$/,
+        use: cssLoadersGenrators(['sass-loader'])
+      },
+      {
+        test: /.sass$/,
+        use: cssLoadersGenrators([{
+          loader: 'sass-loader',
+          options: {
+            indentedSyntax: true
+          }
+        }])
+      },
+      {
+        test: /.less%/,
+        use: cssLoadersGenrators(['less-loader'])
+      },
+      {
+        test: /\.styl(us)?$/,
+        use: cssLoadersGenrators(['stylus-loader'])
+      },
+      {
+        test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 4096,
+            fallback: {
+              loader: 'file-loader',
+              options: {
+                name: 'img/[name].[hash:8].[ext]'
+              }
+            }
+          }
+        }]
+      },
+      {
+        test: /\.(svg)(\?.*)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'img/[name].[hash:8].[ext]'
+          }
+        }]
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 4096,
+            fallback: {
+              loader: 'file-loader',
+              options: {
+                name: 'media/[name].[hash:8].[ext]'
+              }
+            }
+          }
+        }]
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 4096,
+            fallback: {
+              loader: 'file-loader',
+              options: {
+                name: 'fonts/[name].[hash:8].[ext]'
+              }
+            }
+          }
+        }]
+      },
+    ]
+  },
+  plugins: [
+    new VueLoaderPlugin(),
+    new webpack.DefinePlugin(definePluginConfig()),
+    new HtmlWebpackPlugin({
+      template: resolve('public/index.html')
+    }),
+    new ProgressPlugin()
+  ],
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.runtime.esm.js',
+      '@': resolve('src'),
+      'components': resolve('src/components'),
+      'views': resolve('src/views'),
+      'assets': resolve('src/assets'),
+      'request': resolve('src/request'),
+      'services': resolve('src/services')
+    },
+    extensions: [
+      '.mjs',
+      '.js',
+      '.jsx',
+      '.vue',
+      '.json',
+      '.wasm'
+    ],
+  }
+};
