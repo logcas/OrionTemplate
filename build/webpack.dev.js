@@ -3,20 +3,35 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const { resolve } = require('./util');
 const proxyTable = require('../config/proxy');
+const devConfig = require('../config/dev.env');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
+const devServer = Object.assign({
+  host: 'localhost',
+  port: 2019,
+  open: true,
+  hot: true,
+  publicPath: '/',
+  contentBase: resolve('dist'),
+  quiet: true
+}, devConfig.devServer, {
+  proxy: proxyTable
+});
 
 module.exports = merge(baseConfig, {
   mode: 'development',
   output: {
     filename: '[name].js',
   },
-  devServer: {
-    port: 2019,
-    hot: true,
-    publicPath: '/',
-    contentBase: resolve('dist'),
-    proxy: proxyTable
-  },
+  devServer,
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: [`You application is running here http://${devServer.host}:${devServer.port}`],
+        notes: [`Powererd by Orion Vue.js Scaffold`]
+      },
+      clearConsole: true
+    })
   ]
 });

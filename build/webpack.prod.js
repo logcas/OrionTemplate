@@ -5,6 +5,7 @@ const {
 } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractLoader = require('mini-css-extract-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const {
   resolve
 } = require('./util');
@@ -22,7 +23,12 @@ module.exports = merge(baseConfig, {
       toType: 'dir'
     }]),
     new MiniCssExtractLoader({
-      filename: 'style_[contenthash].css'
+      filename: 'style_[contenthash:8].css'
+    }),
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: ['Build Successfully!']
+      },
     })
   ]
 });

@@ -5,7 +5,9 @@ import request from '@/request';
  * @param {String} id 用户ID 
  */
 export const getName = (id) => request.$get('/getname', {
-  id
+  params: {
+    id
+  }
 });
 
 /**
@@ -14,6 +16,8 @@ export const getName = (id) => request.$get('/getname', {
  * @param {*} name 用户名
  */
 export const setName = (id, name) => request.$post('/setname', {
-  id,
-  name
+  data: {
+    id,
+    name
+  }
 });
