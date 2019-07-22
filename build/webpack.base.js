@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressPlugin = require('progress-bar-webpack-plugin');
 const MiniCssExtractLoader = require('mini-css-extract-plugin');
 
-const { definePluginConfig } = require('./config');
+const { definePluginConfig, stats } = require('./config');
 
 const { useLint } = require('../config/lint');
 
@@ -18,7 +18,7 @@ const cssLoadersGenrators = loaders => [
   'postcss-loader'
 ];
 
-let rules = [
+const rules = [
   {
     test: /.vue$/,
     loader: 'vue-loader'
@@ -160,5 +160,6 @@ module.exports = {
       services: resolve('src/services')
     },
     extensions: ['.mjs', '.js', '.jsx', '.vue', '.json', '.wasm']
-  }
+  },
+  stats
 };
