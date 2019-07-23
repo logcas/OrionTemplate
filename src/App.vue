@@ -16,11 +16,16 @@
     </ul>
     <router-view />
     <h1>{{ storeMsg }}</h1>
+    <JsxComponent />
   </div>
 </template>
 
 <script>
+import JsxComponent from 'components/Jsx';
 export default {
+  components: {
+    JsxComponent
+  },
   data() {
     return {
       msg: 'Orion'
