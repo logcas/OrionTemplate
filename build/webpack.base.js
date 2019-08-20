@@ -1,7 +1,7 @@
-const { resolve } = require('./util');
+const { resolve, getEntry, getHtmlWebpackPluginSet } = require('./util');
 const webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressPlugin = require('progress-bar-webpack-plugin');
 const MiniCssExtractLoader = require('mini-css-extract-plugin');
 
@@ -119,10 +119,10 @@ const rules = [
   }
 ];
 
+const entry = getEntry();
+
 module.exports = {
-  entry: {
-    app: resolve('src/index.js')
-  },
+  entry,
   output: {
     path: resolve('dist'),
     publicPath: '/',
@@ -142,11 +142,9 @@ module.exports = {
     )
   },
   plugins: [
+    ...getHtmlWebpackPluginSet(entry),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin(definePluginConfig()),
-    new HtmlWebpackPlugin({
-      template: resolve('public/index.html')
-    }),
     new ProgressPlugin()
   ],
   resolve: {

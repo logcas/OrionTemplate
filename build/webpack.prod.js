@@ -13,7 +13,7 @@ const {
 module.exports = merge(baseConfig, {
   mode: 'production',
   output: {
-    filename: '[name]_[chunkhash:8].js',
+    filename: 'js/[name].[chunkhash:8].js',
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -23,7 +23,7 @@ module.exports = merge(baseConfig, {
       toType: 'dir'
     }]),
     new MiniCssExtractLoader({
-      filename: 'style_[contenthash:8].css'
+      filename: 'css/[name].[contenthash:8].css'
     }),
     new FriendlyErrorsWebpackPlugin({
       compilationSuccessInfo: {

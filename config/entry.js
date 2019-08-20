@@ -1,0 +1,2 @@
+// custom entry
+module.exports = {};
