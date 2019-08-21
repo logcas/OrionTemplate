@@ -3,7 +3,7 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const { resolve, getRewrite, getEntry } = require('./util');
 const proxyTable = require('../config/proxy');
-const devConfig = require('../config/dev.env');
+const { dev } = require('../config');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const devServer = Object.assign({
@@ -14,7 +14,7 @@ const devServer = Object.assign({
   publicPath: '/',
   contentBase: resolve('static'),
   quiet: true
-}, devConfig.devServer, {
+},{
   proxy: proxyTable
 }, {
   historyApiFallback: {
@@ -38,4 +38,4 @@ module.exports = merge(baseConfig, {
       clearConsole: true
     })
   ]
-});
+}, dev.webpackConfig || {});

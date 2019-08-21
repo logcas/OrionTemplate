@@ -7,15 +7,15 @@ const MiniCssExtractLoader = require('mini-css-extract-plugin');
 
 const { definePluginConfig, stats } = require('./config');
 
-const { useLint } = require('../config/lint');
+const { useESLint } = require('../config');
 
-const cssLoadersGenrators = loaders => [
+const cssLoadersGenerator = loaders => [
   process.env.NODE_ENV === 'production'
     ? MiniCssExtractLoader.loader
     : 'vue-style-loader',
   'css-loader',
-  ...loaders,
-  'postcss-loader'
+  'postcss-loader',
+  ...loaders
 ];
 
 const rules = [
@@ -30,15 +30,15 @@ const rules = [
   },
   {
     test: /.css$/,
-    use: cssLoadersGenrators([])
+    use: cssLoadersGenerator([])
   },
   {
     test: /.scss$/,
-    use: cssLoadersGenrators(['sass-loader'])
+    use: cssLoadersGenerator(['sass-loader'])
   },
   {
     test: /.sass$/,
-    use: cssLoadersGenrators([
+    use: cssLoadersGenerator([
       {
         loader: 'sass-loader',
         options: {
@@ -49,11 +49,11 @@ const rules = [
   },
   {
     test: /.less%/,
-    use: cssLoadersGenrators(['less-loader'])
+    use: cssLoadersGenerator(['less-loader'])
   },
   {
     test: /\.styl(us)?$/,
-    use: cssLoadersGenrators(['stylus-loader'])
+    use: cssLoadersGenerator(['stylus-loader'])
   },
   {
     test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
@@ -131,7 +131,7 @@ module.exports = {
   module: {
     noParse: /^(vue|vue-router|vuex|vuex-router-sync)$/,
     rules: rules.concat(
-      useLint
+      useESLint
         ? {
             enforce: 'pre',
             test: /.(js|vue)$/,

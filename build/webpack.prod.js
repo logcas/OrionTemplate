@@ -9,6 +9,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const {
   resolve
 } = require('./util');
+const { prod } = require('../config');
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -31,4 +32,4 @@ module.exports = merge(baseConfig, {
       },
     })
   ]
-});
+}, prod.webpackConfig || {});

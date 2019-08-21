@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="box" />
     <h1>Hello,world</h1>
     <h1>Hello, {{ msg }}</h1>
     <ul>
@@ -40,7 +41,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.box {
+  box-shadow: 0 0 10px #000;
+  width: 30px;
+  height: 30px;
+}
+
 h1 {
   color: red;
+  font-size: 50px;
 }
 </style>
