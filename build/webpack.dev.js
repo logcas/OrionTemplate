@@ -12,7 +12,7 @@ const devServer = Object.assign({
   open: true,
   hot: true,
   publicPath: '/',
-  contentBase: resolve('dist'),
+  contentBase: resolve('static'),
   quiet: true
 }, devConfig.devServer, {
   proxy: proxyTable
