@@ -9,7 +9,7 @@ const htmlWebpackDefaultOptions = {
     minifyJS: true,
     removeComments: true
   }
-}
+};
 
 const resolve = (...p) => path.resolve(__dirname, '..', ...p);
 exports.resolve = resolve;
