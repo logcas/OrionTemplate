@@ -14,7 +14,7 @@ const instance = axios.create(
     },
     baseUrls[process.env.NODE_ENV]
       ? {
-          baseUrl: baseUrls[process.env.NODE_ENV]
+          baseURL: baseUrls[process.env.NODE_ENV]
         }
       : {}
   )
