@@ -16,7 +16,7 @@ exports.resolve = resolve;
 
 exports.PRODUCTION = process.env.NODE_ENV === 'production';
 
-exports.getEntry = function() {
+exports.getEntry = function () {
   const customsEntries = require('../config/entry');
   // 如果自定义了入口文件，就不会扫描 src/applications 目录
   if (Reflect.ownKeys(customsEntries).length !== 0) {
@@ -36,7 +36,7 @@ exports.getEntry = function() {
   return entries;
 };
 
-exports.getHtmlWebpackPluginSet = function(entries) {
+exports.getHtmlWebpackPluginSet = function (entries) {
   let entryName = [];
   if (typeof entries === 'object' && entries !== null) {
     entryName = Reflect.ownKeys(entries);
@@ -55,11 +55,14 @@ exports.getHtmlWebpackPluginSet = function(entries) {
         filename: entry + '.html',
         template: path.join(
           templatesPath,
-          templates.includes(`${entry}.html`)
-            ? entry + '.html'
-            : '__default__.html'
+          templates.includes(`${entry}.html`) ?
+          entry + '.html' :
+          '__default__.html'
         ),
-        excludeChunks: entryName.filter(n => n !== entry)
+        excludeChunks: entryName.filter(n => n !== entry),
+        // fix Error: Cyclic dependency
+        // solution: https://blog.csdn.net/alanfancy/article/details/84023940 
+        chunksSortMode: 'none'
       })
     );
   }
@@ -70,7 +73,7 @@ exports.getHtmlWebpackPluginSet = function(entries) {
   return htmlWebpackPluginSet;
 };
 
-exports.getRewrite = function(entry) {
+exports.getRewrite = function (entry) {
   let __entries__;
   if (typeof entry === 'object' && entry !== null) {
     __entries__ = Reflect.ownKeys(entry);
