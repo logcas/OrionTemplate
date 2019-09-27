@@ -19,7 +19,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([{
-      from: resolve('public'),
+      from: resolve('static'),
       to: resolve('dist'),
       toType: 'dir'
     }]),
