@@ -9,10 +9,7 @@ install:
 before_script: 
 
 script:
-- npm run build
-
-after_script: 
-- node /build/cdn.js
+- npm run build-cdn
 
 branches:
   only:
