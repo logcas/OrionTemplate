@@ -8,7 +8,7 @@ install:
 - npm install
 before_script: 
 script:
-- npm run build
+- npm run build-cdn
 branches:
   only:
   - master
