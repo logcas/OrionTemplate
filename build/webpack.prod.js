@@ -22,6 +22,11 @@ module.exports = merge(baseConfig, {
     filename: 'js/[name].[chunkhash:8].js',
     publicPath: uploadToCdn ? url.resolve(cdnConfig.domain, prod.publicPath) : (prod.publicPath || '/')
   },
+  externals: {
+    'vue': 'vue',
+    'vue-router': 'VueRouter',
+    'vuex': 'vuex'
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([{
