@@ -62,9 +62,6 @@ function uploadFile(uptoken, key, localFile) {
 fileList.forEach(f => {
   //生成上传 Token
   let key = prod.publicPath + f[1];
-  if (key.startsWith('/')) {
-    key = key.slice(1);
-  }
-  // const token = uptoken(bucket, key);
-  uploadFile(uploadToken, key, f[0]);
+  key = key.replace(/^([\/\\]+)/g, '');
+  uploadFile(uploadToken, key.replace(/([\/\\]+)/g, '/'), f[0]);
 });
