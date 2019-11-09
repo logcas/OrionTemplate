@@ -12,9 +12,6 @@ script:
 branches:
   only:
   - master
-env:
-  global:
-    secure: *********
 addons:
   ssh_known_hosts:
   - 139.199.14.123
