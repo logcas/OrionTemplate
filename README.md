@@ -1,6 +1,8 @@
 # Orion
 Orion 是一个 Vue.js 的开发环境。
 
+[![Build Status](https://travis-ci.org/logcas/OrionTemplate.svg?branch=master)](https://travis-ci.org/logcas/OrionTemplate)
+
 ## 开发模式
 - [x] SPA（单页应用）
 - [x] MPA（多页应用）

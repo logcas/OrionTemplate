@@ -26,6 +26,6 @@ module.exports = {
         // 同上
         baseUrl: 'http://www.qq.com',
         webpackConfig: {},
-        publicPath: '/testbuild'
+        publicPath: 'testbuild/'
     }
 };
