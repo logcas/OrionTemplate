@@ -6,6 +6,13 @@ module.exports = {
     // px2rem自定义配置
     // see more: https://github.com/cuth/postcss-pxtorem
     px2remConfig: {},
+    // 是否将静态资源上传到 cdn（七牛云）
+    uploadToCdn: true,
+    cdnConfig: {
+        domain: 'http://img.lxzmww.xyz',
+        accessKey: 'QIPytRNK0T-cwaoI429Itnd9yKBXO-T25L-UtUBf',
+        secretKey: 'ays-QtaDtKKpHCx-71LpzMWe7Hvkn_YYzDjNkiTq'
+    },
     // 开发环境相关设置
     dev: {
         // axios 请求中的 baseUrl
@@ -18,6 +25,7 @@ module.exports = {
     prod: {
         // 同上
         baseUrl: 'http://www.qq.com',
-        webpackConfig: {}
+        webpackConfig: {},
+        publicPath: '/testbuild'
     }
 };

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.prod.js",
+    "build-cdn": "cross-env NODE_ENV=production webpack --config build/webpack.prod.js && node build/cdn.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -38,10 +39,12 @@
     "postcss-loader": "^3.0.0",
     "postcss-pxtorem": "^4.0.1",
     "progress-bar-webpack-plugin": "^1.12.1",
+    "qiniu": "^7.2.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "upyun": "^3.3.11",
     "url-loader": "^2.0.1",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.10",
