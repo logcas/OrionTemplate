@@ -23,9 +23,9 @@ module.exports = merge(baseConfig, {
     publicPath: uploadToCdn ? url.resolve(cdnConfig.domain, prod.publicPath) : (prod.publicPath || '/')
   },
   externals: {
-    'vue': 'vue',
+    'vue': 'Vue',
     'vue-router': 'VueRouter',
-    'vuex': 'vuex'
+    'vuex': 'Vuex'
   },
   plugins: [
     new CleanWebpackPlugin(),
