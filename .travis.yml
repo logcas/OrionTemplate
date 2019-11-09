@@ -20,4 +20,5 @@ before_install:
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 after_success:
 - chmod 600 ~/.ssh/id_rsa   #还是Linux文件权限问题
-- ssh travis@139.199.14.123 -o StrictHostKeyChecking=no 'cd ~/OrionTemplate && git pull && npm install && npm run build-cdn'
+- cd dist
+- scp -r *.html travis@139.199.14.123:/usr/share/nginx/orion
